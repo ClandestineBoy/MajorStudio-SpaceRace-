@@ -35,7 +35,7 @@ public class Projectile_Spawner : MonoBehaviour
         float spawnY;
         float chance;
         chance = Random.Range(0, 2);
-        Debug.Log(chance);
+        //Debug.Log(chance);
         if (chance >= .5f)
         {
             spawnX = rightXBound;

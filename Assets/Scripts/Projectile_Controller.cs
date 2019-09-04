@@ -17,4 +17,15 @@ public class Projectile_Controller : MonoBehaviour
     {
         transform.position = transform.position + new Vector3(xDir*spd, 0, 0);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Border")
+        {
+            Debug.Log("hit wall");
+            Destroy(gameObject);
+        }
+    }
+
+
 }
