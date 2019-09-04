@@ -9,23 +9,39 @@ public class Ship_Controller : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject score;
     private Score_Keep scoreObj;
-
+    private bool dead;
+    private float respawnCount;
+    public float respawnCountMax;
     private Vector2 startPos;
     void Start()
     {
+        respawnCount = respawnCountMax;
+        dead = false;
         scoreObj = score.GetComponent<Score_Keep>();
         startPos = transform.position;
     }
     void Update()
     {
         rb.velocity = Vector2.zero;
-        if (Input.GetKey(up))
+        if (dead)
         {
-            rb.velocity = new Vector2(0,spd);
+            respawnCount -= 1;
+            if(respawnCount <= 0)
+            {
+                dead = false;
+                GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
-        if (Input.GetKey(down))
+        else
         {
-            rb.velocity = new Vector2(0, -spd);
+            if (Input.GetKey(up))
+            {
+                rb.velocity = new Vector2(0, spd);
+            }
+            if (Input.GetKey(down))
+            {
+                rb.velocity = new Vector2(0, -spd);
+            }
         }
     }
 
@@ -36,5 +52,8 @@ public class Ship_Controller : MonoBehaviour
         {
             scoreObj.score += 1;
         }
+        dead = true;
+        respawnCount = respawnCountMax;
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 }
