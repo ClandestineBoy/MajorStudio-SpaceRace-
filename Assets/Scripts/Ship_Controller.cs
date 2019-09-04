@@ -8,7 +8,7 @@ public class Ship_Controller : MonoBehaviour
     public float spd;
     public Rigidbody2D rb;
 
-    private Vaector2 startPos;
+    private Vector2 startPos;
     void Start()
     {
         startPos = transform.position;
