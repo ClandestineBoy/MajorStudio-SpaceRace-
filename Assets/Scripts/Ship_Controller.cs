@@ -7,10 +7,13 @@ public class Ship_Controller : MonoBehaviour
     public KeyCode up, down;
     public float spd;
     public Rigidbody2D rb;
+    public GameObject score;
+    private Score_Keep scoreObj;
 
     private Vector2 startPos;
     void Start()
     {
+        scoreObj = score.GetComponent<Score_Keep>();
         startPos = transform.position;
     }
     void Update()
@@ -29,5 +32,9 @@ public class Ship_Controller : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         transform.position = startPos;
+        if (collision.gameObject.tag == ("Finish"))
+        {
+            scoreObj.score += 1;
+        }
     }
 }
