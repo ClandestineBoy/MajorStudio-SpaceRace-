@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.20392159, g: 0.7607844, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -429,9 +429,9 @@ MonoBehaviour:
   down: 107
   left: 106
   right: 108
-  usePow: 0
-  moveDir: {x: 0, y: 0}
-  spd: 120
+  usePow: 104
+  powMax: 5
+  spd: 130
   rb: {fileID: 618597255}
   score: {fileID: 828464196}
   respawnCountMax: 20
@@ -1207,8 +1207,8 @@ MonoBehaviour:
   left: 97
   right: 100
   usePow: 102
-  moveDir: {x: 0, y: 0}
-  spd: 120
+  powMax: 5
+  spd: 130
   rb: {fileID: 1486513242}
   score: {fileID: 2051969662}
   respawnCountMax: 20
@@ -1509,12 +1509,13 @@ MonoBehaviour:
   spawnCounter: 0
   rightSide: 0
   lastY: 0
-  projectilePrefab: {fileID: 1556156951000374027, guid: e77f5688c0b3e80489b493bd339d5909,
-    type: 3}
+  projectilePrefabs:
+  - {fileID: 1556156951000374027, guid: e77f5688c0b3e80489b493bd339d5909, type: 3}
+  - {fileID: 885411785070192380, guid: 14ec84373e76b9f498225500873bf2d5, type: 3}
   spawnPos: {x: 0, y: 0, z: 0}
   timer: {fileID: 1663027387}
   timerCount: 0
-  timerCountMax: 75
+  timerCountMax: 100
 --- !u!4 &2045416790
 Transform:
   m_ObjectHideFlags: 0

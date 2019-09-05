@@ -23,7 +23,6 @@ public class Projectile_Controller : MonoBehaviour
 
         if (collision.gameObject.tag == "Border")
         {
-            Debug.Log("hit wall");
             Destroy(gameObject);
         }
     }

@@ -11,7 +11,7 @@ public class Projectile_Spawner : MonoBehaviour
     public float spawnCounter;
     public bool rightSide;
     public float lastY;
-    public GameObject projectilePrefab;
+    public List<GameObject> projectilePrefabs;
     public Vector3 spawnPos;
     public Image timer;
     public float timerCount, timerCountMax;
@@ -59,9 +59,9 @@ public class Projectile_Spawner : MonoBehaviour
         float spawnX;
         float spawnY;
         float chance;
-        chance = Random.Range(0, 2);
-        //Debug.Log(chance);
-        if (chance >= .5f)
+        chance = Random.Range(0.0f, 1.0f);
+        Debug.Log(chance);
+        if (chance >= 0.5f)
         {
             spawnX = rightXBound;
             rightSide = true;
@@ -80,7 +80,19 @@ public class Projectile_Spawner : MonoBehaviour
             spawnY = Random.Range(0, topYBound);
         }
         spawnPos = new Vector2(spawnX, spawnY);
-        GameObject spawned = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
+
+        //random chance to spawn projectiles other than bullets
+        float spawnRoll = Random.Range(0.0f,1.0f);
+        int numToSpawn;
+        if(spawnRoll < 0.04f)
+        {
+            numToSpawn = 1;
+        }
+        else
+        {
+            numToSpawn = 0;
+        }
+        GameObject spawned = Instantiate(projectilePrefabs[numToSpawn], spawnPos, Quaternion.identity);
         if (rightSide)
         {
             spawned.GetComponent<Projectile_Controller>().xDir = -1;
