@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Projectile_Spawner : MonoBehaviour
 {
+    public bool gameOn;
     public float leftXBound, rightXBound, topYBound, bottomYBound;
-    public int spawnCounterMax;
-    public int spawnCounter;
+    public float spawnCounterMax;
+    public float spawnCounter;
     public bool rightSide;
     public float lastY;
     public GameObject projectilePrefab;
     public Vector3 spawnPos;
+    public Image timer;
+    public float timerCount, timerCountMax;
     void Start()
     {
+        gameOn = false;
+        timerCount = timerCountMax;
         lastY = 1;
         rightSide = true;
         spawnCounter = spawnCounterMax;
@@ -21,11 +27,30 @@ public class Projectile_Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawnCounter -= 1;
-        if(spawnCounter <= 0)
+        if (gameOn)
         {
-            spawnProjectile();
-            spawnCounter = spawnCounterMax;
+            spawnCounter -= 1 * Time.deltaTime;
+            //handle timer
+            timerCount -= 1 * Time.deltaTime;
+            if (timerCount <= 0)
+            {
+                gameOn = false;
+            }
+            timer.fillAmount = timerCount / timerCountMax;
+            //time projectile respawn
+            if (spawnCounter <= 0)
+            {
+                spawnProjectile();
+                spawnCounter = spawnCounterMax;
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                gameOn = true;
+                timerCount = timerCountMax;
+            }
         }
     }
 

@@ -349,6 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091e5371cd4cb7e40a406995d0706e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gcObj: {fileID: 0}
+  gc: {fileID: 0}
   up: 105
   down: 107
   spd: 3
@@ -911,6 +913,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091e5371cd4cb7e40a406995d0706e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gcObj: {fileID: 0}
+  gc: {fileID: 0}
   up: 119
   down: 115
   spd: 3
@@ -1066,11 +1070,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 9538797c742e2ed489fa0bf93af1b74f, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -1186,7 +1190,7 @@ GameObject:
   - component: {fileID: 2045416789}
   m_Layer: 0
   m_Name: Projectile Spawner
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1203,17 +1207,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57b080422d1a5b4296df0191a27bb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOn: 0
   leftXBound: -6.6
   rightXBound: 6.6
   topYBound: 4
   bottomYBound: -3.4
-  spawnCounterMax: 10
+  spawnCounterMax: 0.25
   spawnCounter: 0
   rightSide: 0
   lastY: 0
   projectilePrefab: {fileID: 1556156951000374027, guid: e77f5688c0b3e80489b493bd339d5909,
     type: 3}
   spawnPos: {x: 0, y: 0, z: 0}
+  timer: {fileID: 1663027387}
+  timerCount: 0
+  timerCountMax: 50
 --- !u!4 &2045416790
 Transform:
   m_ObjectHideFlags: 0
