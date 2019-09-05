@@ -4,16 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Ship_Controller : MonoBehaviour
 {
+    //Game Controller
     public GameObject gcObj;
     public Projectile_Spawner gc;
-
+    //Controls
     public KeyCode up, down, left, right, usePow;
-    public Vector2 moveDir;
+
+    public float powMax;
+    private float pow;
+
+    private Vector2 moveDir;
     public float spd;
+
     public Rigidbody2D rb;
+
     public GameObject score;
     private Score_Keep scoreObj;
+
     private bool dead;
+
     private float respawnCount;
     public float respawnCountMax;
     private Vector2 startPos;
@@ -27,6 +36,9 @@ public class Ship_Controller : MonoBehaviour
     public Image nrgMet;
     void Start()
     {
+        powMax = 5;
+        pow = powMax;
+
         shieldPow = new Power_Class(2, true, 5.0f);
         blastPow = new Power_Class(1);
         boomerangPow = new Power_Class(2);
@@ -83,11 +95,12 @@ public class Ship_Controller : MonoBehaviour
                 }
                 if (Input.GetKeyDown(usePow))
                 {
-                    nrgMet.fillAmount -= .2f;
+                    pow -= 1; ;
                 }
                 moveDir.Normalize();
                 rb.velocity = moveDir * spd * Time.deltaTime;
             }
+            nrgMet.fillAmount = pow / powMax;
         }
         else
         {
@@ -104,12 +117,26 @@ public class Ship_Controller : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //colliding with obstacle or end will send player back to start
+        if (collision.gameObject.tag == ("Finish") || collision.gameObject.tag == ("Projectile"))
+        {
+            dead = true;
+            respawnCount = respawnCountMax;
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
         if (collision.gameObject.tag == ("Finish"))
         {
             scoreObj.score += 1;
+            dead = true;
+            respawnCount = respawnCountMax;
+            GetComponent<SpriteRenderer>().enabled = false;
         }
-        dead = true;
-        respawnCount = respawnCountMax;
-        GetComponent<SpriteRenderer>().enabled = false;
+        if (collision.gameObject.tag == ("Battery"))
+        {
+            Destroy(collision.gameObject);
+            if(pow < powMax)
+            {
+                pow += 1;
+            }
+        }
     }
 }
