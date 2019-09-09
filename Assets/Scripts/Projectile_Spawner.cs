@@ -84,11 +84,11 @@ public class Projectile_Spawner : MonoBehaviour
         //random chance to spawn projectiles other than bullets
         float spawnRoll = Random.Range(0.0f,1.0f);
         int numToSpawn;
-        if(spawnRoll < 0.03f)
+        if(spawnRoll < 0.04f)
         {
             numToSpawn = 1;
         }
-        else if(spawnRoll >= 0.03f && spawnRoll < 0.065f)
+        else if(spawnRoll >= 0.04f && spawnRoll < 0.075f)
         {
             numToSpawn = 2;
         }

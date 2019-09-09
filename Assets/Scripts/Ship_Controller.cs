@@ -132,6 +132,7 @@ public class Ship_Controller : MonoBehaviour
                 //new game starts, reset score
                 scoreObj.score = 0;
             }
+            currentPow = null;
         }
     }
 
