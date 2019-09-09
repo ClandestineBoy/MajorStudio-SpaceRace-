@@ -21,7 +21,10 @@ public class Ship_Controller : MonoBehaviour
     public GameObject score;
     private Score_Keep scoreObj;
 
+    public Transform shieldObj;
+
     private bool dead;
+    private bool immune;
 
     private float respawnCount;
     public float respawnCountMax;
@@ -33,6 +36,8 @@ public class Ship_Controller : MonoBehaviour
     private Power_Class boomerangPow;
     private Power_Class teleportPow;
 
+    float powLifetime;
+
     public Image nrgMet;
     void Start()
     {
@@ -43,17 +48,21 @@ public class Ship_Controller : MonoBehaviour
         blastPow = new Power_Class(1);
         boomerangPow = new Power_Class(2);
         teleportPow = new Power_Class(3);
+        currentPow = shieldPow;
 
-
+        shieldObj = transform.GetChild(0);
+        shieldObj.gameObject.SetActive(false);
         gcObj = GameObject.FindGameObjectWithTag("GameController");
         gc = gcObj.GetComponent<Projectile_Spawner>();
         respawnCount = respawnCountMax;
         dead = false;
+        immune = false;
         scoreObj = score.GetComponent<Score_Keep>();
         startPos = transform.position;
     }
     void Update()
     {
+        Debug.Log(currentPow.ToString());
         //if the game is afoot
         if (gc.gameOn)
         {
@@ -93,10 +102,22 @@ public class Ship_Controller : MonoBehaviour
                     moveDir.x = 1;
                     //rb.velocity = new Vector2(0, -spd);
                 }
-                if (Input.GetKeyDown(usePow))
+
+                if (Input.GetKeyDown(usePow) && currentPow != null && pow >= currentPow.energyCost)
                 {
-                    pow -= 1; ;
+                    powLifetime = currentPow.lifeTime;
+                    usePower(currentPow);
                 }
+                if(powLifetime >= 0)
+                {
+                    powLifetime -= .1f;
+                }
+                else
+                {
+                    immune = false;
+                    shieldObj.gameObject.SetActive(false);
+                }
+
                 moveDir.Normalize();
                 rb.velocity = moveDir * spd * Time.deltaTime;
             }
@@ -114,10 +135,23 @@ public class Ship_Controller : MonoBehaviour
         }
     }
 
+    public void usePower(Power_Class pow)
+    {
+        this.pow -= currentPow.energyCost;
+        if (pow.projectile != null)
+        {
+
+        }
+        if (pow.shield)
+        {
+            immune = true;
+            shieldObj.gameObject.SetActive(true);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //colliding with obstacle or end will send player back to start
-        if (collision.gameObject.tag == ("Finish") || collision.gameObject.tag == ("Projectile"))
+        if (collision.gameObject.tag == ("Finish") || collision.gameObject.tag == ("Projectile") && !immune)
         {
             dead = true;
             respawnCount = respawnCountMax;
@@ -137,6 +171,10 @@ public class Ship_Controller : MonoBehaviour
             {
                 pow += 1;
             }
+        }
+        if (collision.gameObject.tag == ("ShieldPow"))
+        {
+            currentPow = shieldPow;
         }
     }
 }

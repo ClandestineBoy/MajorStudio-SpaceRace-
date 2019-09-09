@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Power_Class
 {
-    int energyCost;
-    GameObject projectile;
-    int projectileDir;
-    bool shield;
-    float lifeTime;
+    public int energyCost;
+    public GameObject projectile;
+    public int projectileDir;
+    public bool shield;
+    public float lifeTime;
 
     Power_Class()
     {
@@ -45,5 +45,17 @@ public class Power_Class
     void Update()
     {
         
+    }
+
+    public override string ToString()
+    {
+        if (shield)
+        {
+            return "Shield Power";
+        }
+        else
+        {
+            return "null";
+        }
     }
 }

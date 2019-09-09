@@ -7,6 +7,10 @@ TagManager:
   - Border
   - Battery
   - Projectile
+  - ShieldPow
+  - BlastPow
+  - BoomerangPow
+  - TeleportPow
   layers:
   - Default
   - TransparentFX
