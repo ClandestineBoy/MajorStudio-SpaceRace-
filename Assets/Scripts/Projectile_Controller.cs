@@ -21,7 +21,7 @@ public class Projectile_Controller : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "Border")
+        if (collision.gameObject.tag == "Border" || collision.gameObject.tag == "Player")
         {
             Destroy(gameObject);
         }

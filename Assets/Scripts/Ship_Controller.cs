@@ -48,7 +48,7 @@ public class Ship_Controller : MonoBehaviour
         blastPow = new Power_Class(1);
         boomerangPow = new Power_Class(2);
         teleportPow = new Power_Class(3);
-        currentPow = shieldPow;
+        //currentPow = shieldPow;
 
         shieldObj = transform.GetChild(0);
         shieldObj.gameObject.SetActive(false);
@@ -62,7 +62,7 @@ public class Ship_Controller : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(currentPow.ToString());
+        //Debug.Log(currentPow.ToString());
         //if the game is afoot
         if (gc.gameOn)
         {

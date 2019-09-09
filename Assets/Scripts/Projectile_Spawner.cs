@@ -88,6 +88,10 @@ public class Projectile_Spawner : MonoBehaviour
         {
             numToSpawn = 1;
         }
+        else if(spawnRoll >= 0.03f && spawnRoll < 0.065f)
+        {
+            numToSpawn = 2;
+        }
         else
         {
             numToSpawn = 0;
