@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Projectile_Spawner : MonoBehaviour
 {
+    public int P1Score;
+    public int P2Score;
+
     public bool gameOn;
     public float leftXBound, rightXBound, topYBound, bottomYBound;
     public float spawnCounterMax;
@@ -15,8 +18,23 @@ public class Projectile_Spawner : MonoBehaviour
     public Vector3 spawnPos;
     public Image timer;
     public float timerCount, timerCountMax;
+
+    public Image startScreen;
+    public Image endScreen;
+    public Text endScreenP1;
+    public Text endScreenP2;
+
+    public AudioSource music;
+    public AudioClip wiiSports;
+    public AudioClip jojo;
+    public AudioClip Gurren;
     void Start()
     {
+        P1Score = 0;
+        P2Score = 0;
+        music = GetComponent<AudioSource>();
+        music.clip = wiiSports;
+        music.Play();
         gameOn = false;
         timerCount = timerCountMax;
         lastY = 1;
@@ -34,6 +52,11 @@ public class Projectile_Spawner : MonoBehaviour
             timerCount -= 1 * Time.deltaTime;
             if (timerCount <= 0)
             {
+                music.clip = Gurren;
+                music.Play();
+                endScreen.gameObject.SetActive(true);
+                endScreenP1.text = P1Score + "";
+                endScreenP2.text = P2Score + "";
                 gameOn = false;
             }
             timer.fillAmount = timerCount / timerCountMax;
@@ -48,8 +71,12 @@ public class Projectile_Spawner : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                music.clip = jojo;
+                music.Play();
+                startScreen.gameObject.SetActive(false);
                 gameOn = true;
                 timerCount = timerCountMax;
+                endScreen.gameObject.SetActive(false);
             }
         }
     }

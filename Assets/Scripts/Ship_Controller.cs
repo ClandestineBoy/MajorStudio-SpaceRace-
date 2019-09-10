@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Ship_Controller : MonoBehaviour
 {
+    public bool P1;
     //Game Controller
     public GameObject gcObj;
     public Projectile_Spawner gc;
@@ -54,7 +55,7 @@ public class Ship_Controller : MonoBehaviour
         shieldPow = new Power_Class(2, true, 5.0f);
         blastPow = new Power_Class(1, 1, blastProj);
         boomerangPow = new Power_Class(2, 1, boomerProj);
-        speedPow = new Power_Class(3, 2f, 5.0f);
+        speedPow = new Power_Class(2, 2f, 5.0f);
         
 
         shieldObj = transform.GetChild(0);
@@ -69,10 +70,11 @@ public class Ship_Controller : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(currentPow);
+        //Debug.Log(currentPow);
         //if the game is afoot
         if (gc.gameOn)
         {
+           
             //currentPow = boomerangPow;
 
             //reset velocity to zero every tick
@@ -180,6 +182,10 @@ public class Ship_Controller : MonoBehaviour
         if (collision.gameObject.tag == ("Finish"))
         {
             scoreObj.score += 1;
+            if (P1)
+                gc.P1Score += 1;
+            else
+                gc.P2Score += 1;
             dead = true;
             respawnCount = respawnCountMax;
             GetComponent<SpriteRenderer>().enabled = false;
