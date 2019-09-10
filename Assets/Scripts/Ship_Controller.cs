@@ -15,11 +15,13 @@ public class Ship_Controller : MonoBehaviour
 
     private Vector2 moveDir;
     public float spd;
+    private float moddedSpd;
 
     public Rigidbody2D rb;
 
     public GameObject score;
     private Score_Keep scoreObj;
+    public Image powIcon;
 
     public Transform shieldObj;
 
@@ -34,22 +36,25 @@ public class Ship_Controller : MonoBehaviour
     private Power_Class shieldPow;
     private Power_Class blastPow;
     private Power_Class boomerangPow;
-    private Power_Class teleportPow;
+    private Power_Class speedPow;
 
     public GameObject blastProj;
+    public GameObject boomerProj;
 
     float powLifetime;
 
     public Image nrgMet;
     void Start()
     {
+        moddedSpd = spd;
+
         powMax = 5;
         pow = powMax;
 
         shieldPow = new Power_Class(2, true, 5.0f);
         blastPow = new Power_Class(1, 1, blastProj);
-        boomerangPow = new Power_Class(2);
-        teleportPow = new Power_Class(3);
+        boomerangPow = new Power_Class(2, 1, boomerProj);
+        speedPow = new Power_Class(3, 2f, 5.0f);
         
 
         shieldObj = transform.GetChild(0);
@@ -68,7 +73,7 @@ public class Ship_Controller : MonoBehaviour
         //if the game is afoot
         if (gc.gameOn)
         {
-            //currentPow = blastPow;
+            //currentPow = boomerangPow;
 
             //reset velocity to zero every tick
             moveDir = Vector2.zero;
@@ -120,10 +125,12 @@ public class Ship_Controller : MonoBehaviour
                 {
                     immune = false;
                     shieldObj.gameObject.SetActive(false);
+                    GetComponent<SpriteRenderer>().color = Color.white;
+                    moddedSpd = spd;
                 }
 
                 moveDir.Normalize();
-                rb.velocity = moveDir * spd * Time.deltaTime;
+                rb.velocity = moveDir * moddedSpd * Time.deltaTime;
             }
             nrgMet.fillAmount = pow / powMax;
         }
@@ -155,6 +162,11 @@ public class Ship_Controller : MonoBehaviour
             immune = true;
             shieldObj.gameObject.SetActive(true);
         }
+        if(pow.speedMod > 1)
+        {
+            moddedSpd *= pow.speedMod;
+            GetComponent<SpriteRenderer>().color = Color.red;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -182,11 +194,43 @@ public class Ship_Controller : MonoBehaviour
         }
         if (collision.gameObject.tag == ("ShieldPow"))
         {
+            if(currentPow == shieldPow && pow < powMax)
+            {
+                pow += 1;
+            }
+            powIcon.sprite = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
+            powIcon.color = collision.gameObject.GetComponent<SpriteRenderer>().color;
             currentPow = shieldPow;
         }
         if (collision.gameObject.tag == ("BlastPow"))
         {
+            if (currentPow == blastPow && pow < powMax)
+            {
+                pow += 1;
+            }
+            powIcon.sprite = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
+            powIcon.color = collision.gameObject.GetComponent<SpriteRenderer>().color;
             currentPow = blastPow;
+        }
+        if (collision.gameObject.tag == ("BoomerangPow"))
+        {
+            if (currentPow == boomerangPow && pow < powMax)
+            {
+                pow += 1;
+            }
+            powIcon.sprite = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
+            powIcon.color = collision.gameObject.GetComponent<SpriteRenderer>().color;
+            currentPow = boomerangPow;
+        }
+        if (collision.gameObject.tag == ("SpeedPow"))
+        {
+            if (currentPow == speedPow && pow < powMax)
+            {
+                pow += 1;
+            }
+            powIcon.sprite = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
+            powIcon.color = collision.gameObject.GetComponent<SpriteRenderer>().color;
+            currentPow = speedPow;
         }
     }
 }

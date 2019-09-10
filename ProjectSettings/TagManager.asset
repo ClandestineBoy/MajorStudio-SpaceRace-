@@ -10,7 +10,8 @@ TagManager:
   - ShieldPow
   - BlastPow
   - BoomerangPow
-  - TeleportPow
+  - Boomer
+  - SpeedPow
   layers:
   - Default
   - TransparentFX

@@ -6,7 +6,7 @@ public class Power_Class
 {
     public int energyCost;
     public GameObject projectile;
-    public int projectileDir;
+    public float speedMod;
     public bool shield;
     public float lifeTime;
 
@@ -32,11 +32,17 @@ public class Power_Class
     public Power_Class(int energyCost, int projectileDir, GameObject projectile)
     {
         this.energyCost = energyCost;
-        this.projectileDir = projectileDir;
+        this.speedMod = projectileDir;
         this.projectile = projectile;
         this.lifeTime = lifeTime;
     }
-    void Start()
+    public Power_Class(int energyCost, float speedMod, float lifeTime)
+    {
+        this.energyCost = energyCost;
+        this.speedMod = speedMod;
+        this.lifeTime = lifeTime;
+    }
+        void Start()
     {
         
     }
