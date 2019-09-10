@@ -36,6 +36,8 @@ public class Ship_Controller : MonoBehaviour
     private Power_Class boomerangPow;
     private Power_Class teleportPow;
 
+    public GameObject blastProj;
+
     float powLifetime;
 
     public Image nrgMet;
@@ -45,10 +47,10 @@ public class Ship_Controller : MonoBehaviour
         pow = powMax;
 
         shieldPow = new Power_Class(2, true, 5.0f);
-        blastPow = new Power_Class(1);
+        blastPow = new Power_Class(1, 1, blastProj);
         boomerangPow = new Power_Class(2);
         teleportPow = new Power_Class(3);
-        //currentPow = shieldPow;
+        
 
         shieldObj = transform.GetChild(0);
         shieldObj.gameObject.SetActive(false);
@@ -62,10 +64,12 @@ public class Ship_Controller : MonoBehaviour
     }
     void Update()
     {
-        //Debug.Log(currentPow.ToString());
+        Debug.Log(currentPow);
         //if the game is afoot
         if (gc.gameOn)
         {
+            //currentPow = blastPow;
+
             //reset velocity to zero every tick
             moveDir = Vector2.zero;
             if (dead)
@@ -141,7 +145,10 @@ public class Ship_Controller : MonoBehaviour
         this.pow -= currentPow.energyCost;
         if (pow.projectile != null)
         {
-
+            if (gameObject.name == "Player1")
+                Instantiate(pow.projectile, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z), Quaternion.identity);
+            if (gameObject.name == "Player2")
+                Instantiate(pow.projectile, new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), Quaternion.identity);
         }
         if (pow.shield)
         {
@@ -176,6 +183,10 @@ public class Ship_Controller : MonoBehaviour
         if (collision.gameObject.tag == ("ShieldPow"))
         {
             currentPow = shieldPow;
+        }
+        if (collision.gameObject.tag == ("BlastPow"))
+        {
+            currentPow = blastPow;
         }
     }
 }

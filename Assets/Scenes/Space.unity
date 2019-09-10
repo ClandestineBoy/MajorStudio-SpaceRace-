@@ -436,6 +436,8 @@ MonoBehaviour:
   score: {fileID: 828464196}
   shieldObj: {fileID: 0}
   respawnCountMax: 20
+  blastProj: {fileID: 4224516526647125259, guid: f059607e0d5dc1f49b6b40a0a145af5f,
+    type: 3}
   nrgMet: {fileID: 1696452577}
 --- !u!50 &618597255
 Rigidbody2D:
@@ -1195,7 +1197,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cd1308cc80856984ea62ce4bd4fa0264, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.6509804, b: 0.19215688, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1465,6 +1467,8 @@ MonoBehaviour:
   score: {fileID: 2051969662}
   shieldObj: {fileID: 0}
   respawnCountMax: 20
+  blastProj: {fileID: 7351886136699673917, guid: 0f4a6bf892645ba4e84bd10801de026d,
+    type: 3}
   nrgMet: {fileID: 304844873}
 --- !u!61 &1486513244
 BoxCollider2D:
@@ -1578,7 +1582,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cd1308cc80856984ea62ce4bd4fa0264, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.6509804, b: 0.19215688, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2084,6 +2088,7 @@ MonoBehaviour:
   - {fileID: 1556156951000374027, guid: e77f5688c0b3e80489b493bd339d5909, type: 3}
   - {fileID: 885411785070192380, guid: 14ec84373e76b9f498225500873bf2d5, type: 3}
   - {fileID: 5453290334596664276, guid: 0cad3b1d77c4d0d46a51b00e7fb22137, type: 3}
+  - {fileID: 0}
   spawnPos: {x: 0, y: 0, z: 0}
   timer: {fileID: 1663027387}
   timerCount: 0

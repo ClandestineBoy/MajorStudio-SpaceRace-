@@ -29,7 +29,7 @@ public class Power_Class
         this.shield = shield;
         this.lifeTime = lifeTime;
     }
-    public Power_Class(int energyCost, int projectileDir, GameObject projectile, float lifeTime)
+    public Power_Class(int energyCost, int projectileDir, GameObject projectile)
     {
         this.energyCost = energyCost;
         this.projectileDir = projectileDir;
