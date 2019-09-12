@@ -52,7 +52,7 @@ public class Ship_Controller : MonoBehaviour
         powMax = 5;
         pow = powMax;
 
-        shieldPow = new Power_Class(2, true, 5.0f);
+        shieldPow = new Power_Class(1, true, 5.0f);
         blastPow = new Power_Class(1, 1, blastProj);
         boomerangPow = new Power_Class(2, 1, boomerProj);
         speedPow = new Power_Class(2, 2f, 5.0f);
